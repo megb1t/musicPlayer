@@ -57,11 +57,15 @@
                 </div>
             </div>
             <!-- navbar end -->
-            <div class="border h-24 flex flex-col justify-center items-center border-red-500">
-                <div id="controls" class="flex border w-fit">
-                    <img src="../assets/backward.svg" alt="back-button">
+            <div class="border min-h-24 flex flex-col justify-center items-center border-red-500">
+                <div id="song-metadata" class="flex items-center justify-center flex-col">
+                    <h2 id="song-name">Song name</h2>
+                    <h4 id="song-category">Song category</h4>
+                </div>
+                <div id="controls" class="flex w-fit">
+                    <img id="back-button" src="../assets/backward.svg" alt="back-button">
                     <img id="play-button" src="../assets/play.svg" alt="play-button">
-                    <img src="../assets/forward.svg" alt="forward-button">
+                    <img id="next-button" src="../assets/forward.svg" alt="forward-button">
                 </div>
                 <p> <span id="currentDuration"> 0:00</span>/<span id="totalDuration">0:00</span></p>
                 <!-- seekbar section -->

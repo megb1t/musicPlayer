@@ -1,6 +1,9 @@
-import { bhojpuriSongItems } from "../assets/assets.js";
+import { allSongItems } from "../assets/assets.js";
 import { genreItem } from "../assets/assets.js";
-import { hindiSongItems } from "../assets/assets.js";
+
+
+//music control
+
 
 let currentSong = new Audio()
 
@@ -10,17 +13,53 @@ const controlImages = controlButtonsDiv.querySelectorAll("img");
 
 const currentDurationSpan = document.getElementById("currentDuration")
 
+const forwardButton = document.getElementById("next-button")
+const backButton = document.getElementById("back-button")
+
+
 if (!currentSong.src) {
     controlImages.forEach(img => {
         img.style.pointerEvents = "none";
         img.style.userSelect = "none";
         img.style.opacity = "0.5";
     })
-} 
+}
+
+let currentSongIndex = 0;
+
+const skipForward = () => {
+    currentSongIndex = (currentSongIndex + 1) % allSongItems.length;
+    const nextSong = allSongItems[currentSongIndex];
+    setCurrentSong(nextSong);
+};
+const skipBackward = () => {
+    let newIndex = currentSongIndex - 1;
+    if (newIndex < 0) {
+        newIndex = allSongItems.length - 1;
+    }
+    currentSongIndex = newIndex;
+    const prevSong = allSongItems[currentSongIndex];
+    setCurrentSong(prevSong);
+};
+
+forwardButton.addEventListener("click", skipForward)
+backButton.addEventListener("click", skipBackward)
+
+
+//load metadata on ui
+
+let songNameFeild = document.getElementById("song-name")
+let songCategoryFeild = document.getElementById("song-category")
+
+const capitalizeFirstLetter = (string) => {
+    if (!string) return ''; 
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 
 const setCurrentSong = (song) => {
 
+    currentSongIndex = allSongItems.findIndex(thisSong => thisSong.id === song.id)
     currentSong.src = song.path;
     playButton.src = "../assets/play.svg"
     currentSong.pause()
@@ -35,6 +74,9 @@ const setCurrentSong = (song) => {
     progressBar.style.width = "0"
 
     currentSong.onloadedmetadata = () => {
+
+        songNameFeild.innerText = song.name
+        songCategoryFeild.innerText = capitalizeFirstLetter(song.category)
 
         const totalSeconds = currentSong.duration;
 
@@ -51,10 +93,10 @@ const setCurrentSong = (song) => {
 
 currentSong.addEventListener('timeupdate', () => {
     const currentTimeInSeconds = currentSong.currentTime;
-    
+
     const minutes = Math.floor(currentTimeInSeconds / 60);
     const seconds = Math.floor(currentTimeInSeconds % 60);
-    
+
     const formattedSeconds = String(seconds).padStart(2, '0');
 
     currentDurationSpan.innerText = `${minutes}:${formattedSeconds}`;
@@ -80,6 +122,8 @@ genreItem.forEach(genre => {
 //Playlist items
 
 const bhojpuriList = document.getElementById("bhojpuri-items")
+
+const bhojpuriSongItems = allSongItems.filter(song => song.category === "bhojpuri")
 
 bhojpuriSongItems.forEach(song => {
     const songItem = document.createElement("p")
@@ -116,6 +160,8 @@ bhojpuriSelectorButton.addEventListener("click", toggleBhojpuriPlaylist)
 //hindi items
 
 const hindiList = document.getElementById("hindi-items")
+
+const hindiSongItems = allSongItems.filter(song=>song.category === "hindi")
 
 hindiSongItems.forEach(song => {
     const songItem = document.createElement("p")
