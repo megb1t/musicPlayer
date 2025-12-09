@@ -57,20 +57,26 @@
                 </div>
             </div>
             <!-- navbar end -->
-            <div class="border min-h-24 flex flex-col justify-center items-center border-red-500">
-                <div id="song-metadata" class="flex items-center justify-center flex-col">
-                    <h2 id="song-name">Song name</h2>
-                    <h4 id="song-category">Song category</h4>
-                </div>
-                <div id="controls" class="flex w-fit">
-                    <img id="back-button" src="../assets/backward.svg" alt="back-button">
-                    <img id="play-button" src="../assets/play.svg" alt="play-button">
-                    <img id="next-button" src="../assets/forward.svg" alt="forward-button">
-                </div>
-                <p> <span id="currentDuration"> 0:00</span>/<span id="totalDuration">0:00</span></p>
-                <!-- seekbar section -->
-                <div id="seekbar" class="border w-32 sm:w-64 border-blue-400">
-                    <div class="bg-red-500 h-2 w-0">
+            <div class="flex w-screen h-screen">
+                <div class="border min-h-24 w-full flex flex-col justify-center items-center border-red-500">
+                    <div id="song-metadata" class="flex items-center justify-center flex-col">
+                        <h2 id="song-name">Song name</h2>
+                        <h4 id="song-category">Song category</h4>
+                    </div>
+                    <div id="controls" class="flex w-fit">
+                        <img id="back-button" src="../assets/backward.svg" alt="back-button">
+                        <img id="play-button" src="../assets/play.svg" alt="play-button">
+                        <img id="next-button" src="../assets/forward.svg" alt="forward-button">
+                    </div>
+                    <p> <span id="currentDuration"> 0:00</span>/<span id="totalDuration">0:00</span></p>
+                    <!-- seekbar section -->
+                    <div id="seekbar" class="border w-32 sm:w-64 border-blue-400">
+                        <div class="bg-red-500 h-2 w-0">
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-center items-center" id="volume">
+                        <label for="volumeSlider">Volume:</label>
+                        <input class="w-32" type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
                     </div>
                 </div>
             </div>

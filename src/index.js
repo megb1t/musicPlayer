@@ -102,6 +102,34 @@ currentSong.addEventListener('timeupdate', () => {
     currentDurationSpan.innerText = `${minutes}:${formattedSeconds}`;
 });
 
+document.addEventListener("keydown", (event)=> {
+    event.preventDefault()
+    const keyPressed = event.key
+
+    switch (keyPressed) {
+        case "ArrowLeft":
+            skipBackward()
+            playSong()
+            break;
+
+        case "ArrowRight":
+            skipForward()
+            playSong()
+            break;
+        
+        case " ":
+            playSong()
+            break;
+        case "m":
+        case "M":
+            currentSong.muted = !currentSong.muted;
+            break;
+        default:
+            break;
+    }
+
+})
+
 //category items
 
 const genreList = document.getElementById("genre-list")
@@ -353,6 +381,34 @@ document.addEventListener("mouseup", () => {
 //duration
 
 let totalDuration = document.getElementById("totalDuration")
+
+
+//vol control  // ai generated
+
+const volumeSlider = document.getElementById('volumeSlider');
+
+const audioContext = new (window.AudioContext)();
+
+const source = audioContext.createMediaElementSource(currentSong);
+
+const gainNode = audioContext.createGain();
+
+// The audio flow is: Source -> GainNode -> Destination (Speakers/Headphones)
+source.connect(gainNode);
+gainNode.connect(audioContext.destination);
+
+
+gainNode.gain.value = volumeSlider.value;
+
+volumeSlider.addEventListener('input', () => {
+    gainNode.gain.value = volumeSlider.value;
+});
+
+currentSong.addEventListener('play', () => {
+    if (audioContext.state === 'suspended') {
+        audioContext.resume();
+    }
+});
 
 
 
