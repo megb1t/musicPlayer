@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" href="output.css">
+</head>
+
+<body>
+    <div class="flex mx-10">
+        <div id="sidebar"
+            class="flex sm:relative fixed z-20 overflow-hidden items-start justify-center py-2 px-5 flex-col w-64 bg-blue-300 h-screen">
+            <div class="flex my-2 items-center">
+                <img class="mr-3" src="../assets/logo.svg" alt="">
+                <h2 class="font-medium text-md ">megPlayer</h2>
+                <img id="phonesidebartogglebutton" src="../assets/panel-left-close.svg"
+                    class="mx-10 cursor-pointer sm:hidden">
+            </div>
+            <hr class="font-bold border w-full border-black">
+            <div class="mt-2 w-full">
+                <h5 class="text-md">Genre</h5>
+                <ul id="genre-list" class="flex flex-col text-sm">
+                </ul>
+            </div>
+
+            <div id="playlist-items" class="flex flex-col h-full justify-around">
+                <p class="m-0 p-0">PlayList</p>
+                <div class="hidden" id="bhojpuri-items"></div>
+                <div class="hidden" id="hindi-items"></div>
+                <div id="empty-items" class="h-full w-full justify-between flex items-center">
+                    <p class="p-0 m-0 text-sm">Open a genre to explore the playlist.</p>
+                </div>
+            </div>
+
+            <div class="grow"></div>
+
+            <hr class="font-bold border w-full border-black">
+
+            <div class="mt-2 w-full flex items-center">
+                <p class="m-0 p-0">Made by MegVillan</p>
+            </div>
+        </div>
+
+        <!-- Sidebar End -->
+
+        <div class="w-full h-screen border border-black flex flex-col">
+            <div class="flex items-center w-full max-h-16 overflow-hidden">
+                <img src="../assets/panel-left-close.svg" id="sidebar-button"
+                    class="sm:flex hidden items-center justify-center p-5">
+                <img id="phoneSidebarButton" class="flex sm:hidden items-center justify-center p-5"
+                    src="../assets/panel-left-open.svg">
+                <div class="w-full flex justify-between h-full items-center">
+                    <button class="border px-5 py-2">Add Songs</button>
+                    <button class="border px-5 py-2">Search</button>
+                </div>
+            </div>
+            <!-- navbar end -->
+            <div class="border h-24 flex flex-col justify-center items-center border-red-500">
+                <div id="controls" class="flex border w-fit">
+                    <img src="../assets/backward.svg" alt="back-button">
+                    <img id="play-button" src="../assets/play.svg" alt="play-button">
+                    <img src="../assets/forward.svg" alt="forward-button">
+                </div>
+                <p> <span id="currentDuration"> 0:00</span>/<span id="totalDuration">0:00</span></p>
+                <!-- seekbar section -->
+                <div id="seekbar" class="border w-32 sm:w-64 border-blue-400">
+                    <div class="bg-red-500 h-2 w-0">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    <script src="index.js" type="module"></script>
+</body>
+
+</html>
